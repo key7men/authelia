@@ -72,6 +72,36 @@ const (
 )
 
 const (
+	queryFmtSelectOTP = `
+		SELECT id, public_id, signature, iat, issued_ip, exp, username intent, consumed, consumed_ip, revoked, revoked_ip, password
+		FROM %s
+		WHERE signature = ? AND username = ?;`
+
+	queryFmtInsertOTP = `
+		INSERT INTO %s (public_id, signature, iat, issued_ip, exp, username, intent, password)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?);`
+
+	queryFmtConsumeOTP = `
+		UPDATE %s
+		SET consumed = ?, consumed_ip = ?
+		WHERE signature = ?;`
+
+	queryFmtRevokeOTP = `
+		UPDATE %s
+		SET revoked = CURRENT_TIMESTAMP, revoked_ip = ?
+		WHERE public_id = ?;`
+
+	queryFmtSelectOTPEncryptedData = `
+		SELECT id, password
+		FROM %s;`
+
+	queryFmtUpdateOTPEncryptedData = `
+		UPDATE %s
+		SET password = ?
+		WHERE id = ?;`
+)
+
+const (
 	queryFmtSelectTOTPConfiguration = `
 		SELECT id, created_at, last_used_at, username, issuer, algorithm, digits, period, secret
 		FROM %s
@@ -82,16 +112,6 @@ const (
 		FROM %s
 		LIMIT ?
 		OFFSET ?;`
-
-	queryFmtSelectTOTPConfigurationsEncryptedData = `
-		SELECT id, secret
-		FROM %s;`
-
-	//nolint:gosec // These are not hardcoded credentials it's a query to obtain credentials.
-	queryFmtUpdateTOTPConfigurationSecret = `
-		UPDATE %s
-		SET secret = ?
-		WHERE id = ?;`
 
 	queryFmtUpsertTOTPConfiguration = `
 		REPLACE INTO %s (created_at, last_used_at, username, issuer, algorithm, digits, period, secret)
@@ -116,6 +136,15 @@ const (
 	queryFmtDeleteTOTPConfiguration = `
 		DELETE FROM %s
 		WHERE username = ?;`
+
+	queryFmtSelectTOTPConfigurationsEncryptedData = `
+		SELECT id, secret
+		FROM %s;`
+
+	queryFmtUpdateTOTPConfigurationEncryptedData = `
+		UPDATE %s
+		SET secret = ?
+		WHERE id = ?;`
 )
 
 //nolint:gosec // The following queries are not hard coded credentials.
@@ -242,6 +271,14 @@ const (
 		VALUES ($1, $2)
 			ON CONFLICT (name)
 			DO UPDATE SET value = $2;`
+
+	queryFmtSelectEncryptionEncryptedData = `
+		SELECT id, value
+		FROM %s;`
+
+	queryFmtUpdateEncryptionEncryptedData = `
+		UPDATE %s
+		SET value = ?`
 )
 
 const (
@@ -276,11 +313,6 @@ const (
 		SET subject = ?
 		WHERE id = ?;`
 
-	queryFmtUpdateOAuth2ConsentSessionSessionData = `
-		UPDATE %s
-		SET session_data = ?
-		WHERE id = ?;`
-
 	queryFmtUpdateOAuth2ConsentSessionResponse = `
 		UPDATE %s
 		SET authorized = ?, responded_at = CURRENT_TIMESTAMP, granted_scopes = ?, granted_audience = ?, preconfiguration = ?
@@ -297,10 +329,6 @@ const (
 		active, revoked, form_data, session_data
 		FROM %s
 		WHERE signature = ? AND revoked = FALSE;`
-
-	queryFmtSelectOAuth2SessionEncryptedData = `
-		SELECT id, session_data
-		FROM %s;`
 
 	queryFmtInsertOAuth2Session = `
 		INSERT INTO %s (challenge_id, request_id, client_id, signature, subject, requested_at,
@@ -362,6 +390,15 @@ const (
 		VALUES ($1, $2)
 			ON CONFLICT (signature)
 			DO UPDATE SET expires_at = $2;`
+
+	queryFmtSelectOAuth2SessionEncryptedData = `
+		SELECT id, session_data
+		FROM %s;`
+
+	queryFmtUpdateOAuth2ConsentSessionEncryptedData = `
+		UPDATE %s
+		SET session_data = ?
+		WHERE id = ?;`
 )
 
 const (

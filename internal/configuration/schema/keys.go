@@ -349,4 +349,10 @@ var Keys = []string{
 	"privacy_policy.enabled",
 	"privacy_policy.require_user_acceptance",
 	"privacy_policy.policy_url",
+	"identity_validation.reset_password.jwt_secret",
+	"identity_validation.reset_password.email_expiration",
+	"identity_validation.credential_registration.email_expiration",
+	"identity_validation.credential_registration.elevation_expiration",
+	"identity_validation.credential_registration.otp_characters",
+	"identity_validation.credential_registration.skip_2fa",
 }

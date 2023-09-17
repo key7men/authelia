@@ -1063,5 +1063,35 @@
         "path": "privacy_policy.policy_url",
         "secret": false,
         "env": "AUTHELIA_PRIVACY_POLICY_POLICY_URL"
+    },
+    {
+        "path": "identity_validation.reset_password.jwt_secret",
+        "secret": true,
+        "env": "AUTHELIA_IDENTITY_VALIDATION_RESET_PASSWORD_JWT_SECRET_FILE"
+    },
+    {
+        "path": "identity_validation.reset_password.email_expiration",
+        "secret": false,
+        "env": "AUTHELIA_IDENTITY_VALIDATION_RESET_PASSWORD_EMAIL_EXPIRATION"
+    },
+    {
+        "path": "identity_validation.credential_registration.email_expiration",
+        "secret": false,
+        "env": "AUTHELIA_IDENTITY_VALIDATION_CREDENTIAL_REGISTRATION_EMAIL_EXPIRATION"
+    },
+    {
+        "path": "identity_validation.credential_registration.elevation_expiration",
+        "secret": false,
+        "env": "AUTHELIA_IDENTITY_VALIDATION_CREDENTIAL_REGISTRATION_ELEVATION_EXPIRATION"
+    },
+    {
+        "path": "identity_validation.credential_registration.otp_characters",
+        "secret": false,
+        "env": "AUTHELIA_IDENTITY_VALIDATION_CREDENTIAL_REGISTRATION_OTP_CHARACTERS"
+    },
+    {
+        "path": "identity_validation.credential_registration.skip_2fa",
+        "secret": false,
+        "env": "AUTHELIA_IDENTITY_VALIDATION_CREDENTIAL_REGISTRATION_SKIP_2FA"
     }
 ]

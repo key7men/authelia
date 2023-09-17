@@ -85,7 +85,7 @@ func IdentityVerificationStart(args IdentityVerificationStartArgs, delayFunc Tim
 
 		recipient := mail.Address{Name: identity.DisplayName, Address: identity.Email}
 
-		if err = ctx.Providers.Notifier.Send(ctx, recipient, args.MailTitle, ctx.Providers.Templates.GetIdentityVerificationEmailTemplate(), data); err != nil {
+		if err = ctx.Providers.Notifier.Send(ctx, recipient, args.MailTitle, ctx.Providers.Templates.GetIdentityVerificationJWTEmailTemplate(), data); err != nil {
 			ctx.Error(err, messageOperationFailed)
 			return
 		}

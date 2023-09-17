@@ -24,4 +24,5 @@ type Configuration struct {
 	WebAuthn              WebAuthn              `koanf:"webauthn" json:"webauthn" jsonschema:"title=WebAuthn" jsonschema_description:"WebAuthn Configuration"`
 	PasswordPolicy        PasswordPolicy        `koanf:"password_policy" json:"password_policy" jsonschema:"title=Password Policy" jsonschema_description:"Password Policy Configuration"`
 	PrivacyPolicy         PrivacyPolicy         `koanf:"privacy_policy" json:"privacy_policy" jsonschema:"title=Privacy Policy" jsonschema_description:"Privacy Policy Configuration"`
+	IdentityValidation    IdentityValidation    `koanf:"identity_validation" json:"identity_validation" jsonschema:"title=Identity Validation" jsonschema_description:"Identity Validation Configuration"`
 }

@@ -20,7 +20,7 @@ issue prior to code being shipped.
 For this reason it's essential that the marshalled object contains all values populated, especially the secret.
 */
 func TestShouldOnlyMarshalPeriodAndDigitsAndAbsolutelyNeverSecret(t *testing.T) {
-	object := TOTPConfiguration{
+	object := &TOTPConfiguration{
 		ID:        1,
 		Username:  "john",
 		Issuer:    "Authelia",
@@ -40,6 +40,7 @@ func TestShouldOnlyMarshalPeriodAndDigitsAndAbsolutelyNeverSecret(t *testing.T) 
 	// DO NOT REMOVE OR CHANGE THESE TESTS UNLESS YOU FULLY UNDERSTAND THE COMMENT AT THE TOP OF THIS TEST.
 	require.NotContains(t, string(data), "secret")
 	require.NotContains(t, string(data), "ABC123")
+	require.NotContains(t, string(data), "QUJDMTIz")
 }
 
 func TestShouldReturnErrWhenImageTooSmall(t *testing.T) {

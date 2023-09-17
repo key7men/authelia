@@ -31,8 +31,9 @@ type OpenAPIAssetTemplates struct {
 
 // NotificationTemplates are the templates for the notification system.
 type NotificationTemplates struct {
-	identityVerification *EmailTemplate
-	event                *EmailTemplate
+	jwtIdentityVerification *EmailTemplate
+	otpIdentityVerification *EmailTemplate
+	event                   *EmailTemplate
 }
 
 // Template covers shared implementations between the text and html template.Template.

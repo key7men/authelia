@@ -952,6 +952,11 @@
           "$ref": "#/$defs/PrivacyPolicy",
           "title": "Privacy Policy",
           "description": "Privacy Policy Configuration"
+        },
+        "identity_validation": {
+          "$ref": "#/$defs/IdentityValidation",
+          "title": "Identity Validation",
+          "description": "Identity Validation Configuration"
         }
       },
       "additionalProperties": false,
@@ -1860,6 +1865,91 @@
       "additionalProperties": false,
       "type": "object",
       "description": "IdentityProvidersOpenIDConnectPolicyRule configuration for OpenID Connect 1.0 authorization policies rules."
+    },
+    "IdentityValidation": {
+      "properties": {
+        "reset_password": {
+          "$ref": "#/$defs/IdentityValidationResetPassword",
+          "title": "Reset Password",
+          "description": "Identity validation options for the Reset Password flow"
+        },
+        "credential_registration": {
+          "$ref": "#/$defs/IdentityValidationCredentials",
+          "title": "Credential Registration",
+          "description": "Identity validation options for the Credential Modification flows"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "description": "IdentityValidation represents the configuration for identity verification actions/flows."
+    },
+    "IdentityValidationCredentials": {
+      "properties": {
+        "email_expiration": {
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^\\d+\\s*(y|M|w|d|h|m|s|ms|((year|month|week|day|hour|minute|second|millisecond)s?))(\\s*\\d+\\s*(y|M|w|d|h|m|s|ms|((year|month|week|day|hour|minute|second|millisecond)s?)))*$"
+            },
+            {
+              "type": "integer",
+              "description": "The duration in seconds"
+            }
+          ],
+          "description": "Duration of time the OTP code is considered valid"
+        },
+        "elevation_expiration": {
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^\\d+\\s*(y|M|w|d|h|m|s|ms|((year|month|week|day|hour|minute|second|millisecond)s?))(\\s*\\d+\\s*(y|M|w|d|h|m|s|ms|((year|month|week|day|hour|minute|second|millisecond)s?)))*$"
+            },
+            {
+              "type": "integer",
+              "description": "The duration in seconds"
+            }
+          ],
+          "title": "Elevation Expiration",
+          "description": "Duration of time the elevation can exist for after the user performs the validation"
+        },
+        "otp_characters": {
+          "type": "integer",
+          "title": "OTP Characters",
+          "description": "Number of characters in the generated OTP codes"
+        },
+        "skip_2fa": {
+          "type": "boolean",
+          "title": "Skip 2FA",
+          "description": "Skips 2FA requirement TODO"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "description": "IdentityValidationCredentials represents the tunable aspects of the credential control identity verification action/flow."
+    },
+    "IdentityValidationResetPassword": {
+      "properties": {
+        "jwt_secret": {
+          "type": "string",
+          "title": "JWT Secret",
+          "description": "The JWT secret used to sign the Reset Password flow JWT's"
+        },
+        "EmailExpiration": {
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^\\d+\\s*(y|M|w|d|h|m|s|ms|((year|month|week|day|hour|minute|second|millisecond)s?))(\\s*\\d+\\s*(y|M|w|d|h|m|s|ms|((year|month|week|day|hour|minute|second|millisecond)s?)))*$"
+            },
+            {
+              "type": "integer",
+              "description": "The duration in seconds"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "description": "IdentityValidationResetPassword represents the tunable aspects of the reset password identity verification action/flow."
     },
     "JWK": {
       "properties": {
